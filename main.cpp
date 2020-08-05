@@ -15,7 +15,7 @@ private:
 	int weapon = 0;
 
 public:
-	void get_xp() { cout << total_xp << endl; };
+	int get_xp() { return total_xp; };
 	void add_xp(int xp) { total_xp += xp; };
 	void equip_weapon(int new_weapon) { weapon = new_weapon; };
 	int attack() { return strengh + weapon; };
@@ -25,11 +25,13 @@ class Enemy {
 private:
 	string name = "Unknown";
 	int health = 10;
+	int xp = 5;
 
 public:
 	string get_name() {return name;};
 	int get_health() { return health; };
 	void set_health(int new_health) { health = new_health; };
+	int get_xp() {return xp;}
 	
 	Enemy(string new_name, int new_health) { 
 		name = new_name;
@@ -37,7 +39,7 @@ public:
 	 }
 };
 
-void battle(Player character, Enemy monster ) {
+void battle(Player &character, Enemy monster ) {
 	
 	cout << "You encountered " << monster.get_name() << endl;
 	char action;
@@ -51,6 +53,8 @@ void battle(Player character, Enemy monster ) {
 		}
 	};
 	cout << "You defeated the enemy!" << endl;
+	character.add_xp(monster.get_xp());
+	cout << "You earned " << monster.get_xp() << " experience points." << endl;
 };
 
 void inventory(Player &character) {
@@ -86,5 +90,8 @@ int main() {
 		}
 	}
 	
+	cout << "You earned " << Andrew.get_xp() << " experience points!" << endl;
+	cout << "Well done hero!" << endl;
+
 	return 0;
 }
