@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "monster.h"
+
 using namespace std;
 
 class Player {
@@ -15,33 +17,6 @@ public:
 	void equip_weapon(int new_weapon) { weapon = new_weapon; };
 	int attack() { return strengh + weapon; };
 };
-
-class Enemy { 
-private:
-	string name;
-	int health;
-	int xp;
-
-public:
-	// Constructors
-	Enemy(string new_name, int new_health);
-	string get_name();
-	int get_health();
-	void set_health(int new_health);
-	int get_xp();
-};
-
-Enemy::Enemy(string new_name, int new_health) {
-	name = new_name;
-	health = new_health;
-}	
-
-string Enemy::get_name() {return name;}
-int Enemy::get_health() { return health; }
-void Enemy::set_health(int new_health) { health = new_health; }
-int Enemy::get_xp() {return xp;}
-
-
 
 void battle(Player &character, Enemy monster ) {
 	
