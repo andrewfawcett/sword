@@ -1,12 +1,7 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 using namespace std;
-
-void count() {
-	for (int i = 0; i < 10; i++) {
-		cout << i << endl;
-	}
-};
 
 class Player {
 private:
@@ -21,23 +16,32 @@ public:
 	int attack() { return strengh + weapon; };
 };
 
-class Enemy {
+class Enemy { 
 private:
-	string name = "Unknown";
-	int health = 10;
-	int xp = 5;
+	string name;
+	int health;
+	int xp;
 
 public:
-	string get_name() {return name;};
-	int get_health() { return health; };
-	void set_health(int new_health) { health = new_health; };
-	int get_xp() {return xp;}
-	
-	Enemy(string new_name, int new_health) { 
-		name = new_name;
-		health = new_health;
-	 }
+	// Constructors
+	Enemy(string new_name, int new_health);
+	string get_name();
+	int get_health();
+	void set_health(int new_health);
+	int get_xp();
 };
+
+Enemy::Enemy(string new_name, int new_health) {
+	name = new_name;
+	health = new_health;
+}	
+
+string Enemy::get_name() {return name;}
+int Enemy::get_health() { return health; }
+void Enemy::set_health(int new_health) { health = new_health; }
+int Enemy::get_xp() {return xp;}
+
+
 
 void battle(Player &character, Enemy monster ) {
 	
@@ -72,6 +76,13 @@ void inventory(Player &character) {
 	};
 };
 	
+void save(Player character) {
+	cout << "Saving the game..." << endl;
+	ofstream save_file;
+	save_file.open ("save.txt");
+	save_file << character.get_xp() << endl;
+	save_file.close();
+};
 
 int main() {
 	cout << "Welcome Warrior of Light!" << endl;
@@ -80,13 +91,26 @@ int main() {
 	Enemy Asp ("Asp", 7);
 
 	char action;
+	
+	while (action != 'l' and 'n' and 'q' ) {
+		cout << "(l)oad game, (n)ew game, (q)uit: ";
+		cin >> action;
+		if (action == 'l') {
+			cout << "loading game" << endl;
+		} else if (action == 'n') {
+			cout << "starting new game!" << endl;
+		}
+	}
+	
 	while (action !=  'q') {
-		cout << "(i)nventory, (b)attle, (q)uit: ";
+		cout << "(i)nventory, (b)attle, (s)ave, (q)uit: ";
 		cin >> action;
 		if (action == 'i') {
 			inventory(Andrew);
 		} else if (action == 'b') {
 			battle(Andrew, Asp);
+		} else if (action == 's') {
+			save(Andrew);
 		}
 	}
 	
@@ -95,3 +119,6 @@ int main() {
 
 	return 0;
 }
+
+
+	
