@@ -2,16 +2,19 @@
 #include "monster.h"
 
 // Constructors
-Enemy::Enemy(std::string new_name, int new_health) {
-	name = new_name;
-	health = new_health;
-	xp = 10;
+Enemy::Enemy(std::string name, int level) {
+	m_name = name;
+	m_level = level;
+	m_strength = 1;
+	m_health = 5 + (level * 5);
+	m_xp = 2 + (level * 4);
 }	
 
 // Getters
-std::string Enemy::get_name() {return name;}
-int Enemy::get_health() { return health; }
-int Enemy::get_xp() {return xp;}
+std::string Enemy::get_name() {return m_name;}
+int Enemy::get_health() { return m_health; }
+int Enemy::get_strength() { return m_strength;}
+int Enemy::get_xp() { return m_xp; }
 
 // Setters
-void Enemy::set_health(int new_health) { health = new_health; }
+void Enemy::set_health(int health) { m_health = health; }

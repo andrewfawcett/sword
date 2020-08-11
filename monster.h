@@ -5,21 +5,25 @@
 
 class Enemy { 
 private:
-	std::string name;
-	int health;
-	int xp;
+	std::string m_name;
+	int m_level;
+	int m_xp;
+	
+	int m_health;
+	int m_strength;
 
 public:
 	// Constructors
-	Enemy(std::string new_name, int new_health);
+	Enemy(std::string name, int level);
 	
 	// Getters
 	std::string get_name();
+	int get_strength();
 	int get_health();
 	int get_xp();
 	
 	// Setters
-	void set_health(int new_health);
+	void set_health(int health);
 };
 
 #endif
